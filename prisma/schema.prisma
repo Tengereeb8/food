@@ -7,24 +7,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id          Int         @id @default(autoincrement())
+  email       String      @unique
+  password    String
+  phoneNumber String
+  address     String
+  role        UserRoleEnum
+  isVerified  Boolean
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  orders      FoodOrder[]
+}
+
+model FoodCategory {
+  id           Int      @id @default(autoincrement())
+  categoryName String                        
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  foods        Food[]
+}
+
 model Food {
-  id          Int   @id @default(autoincrement())
-  foodname    String   
-  price       Float
-  image       String
-  ingredients String
-  category    FoodCategory @relation(fields: [foodCategoryId], references: [id])
+  id             Int             @id @default(autoincrement())
+  foodName       String?                     
+  price          Float                       
+  image          String?                     
+  ingredients    String?                     
   foodCategoryId Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  category       FoodCategory    @relation(fields: [foodCategoryId], references: [id])
+  foodOrderItems FoodOrderItem[]
+}
 
-  
-} 
+model FoodOrder {
+  id             Int             @id @default(autoincrement())
+  totalPrice     Float                       
+  status         FoodOrderStatusEnum
+  userId         Int
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  user           User            @relation(fields: [userId], references: [id])
+  foodOrderItems FoodOrderItem[]
+}
 
-model FoodCategory{
-id Int @id @default(autoincrement())
-name String
-foods Food[]
-createdAt DateTime @default(now())
-updatedAt DateTime @updatedAt
+model FoodOrderItem {
+  id          Int       @id @default(autoincrement())
+  quantity    Int
+  foodId      Int
+  foodOrderId Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt               
+  food        Food      @relation(fields: [foodId], references: [id])
+  order       FoodOrder @relation(fields: [foodOrderId], references: [id])
+}
+enum FoodOrderStatusEnum {
+  PENDING
+  CANCELED
+  DELIVERED
+}
+enum UserRoleEnum {
+  USER 
+  ADMIN
 }
