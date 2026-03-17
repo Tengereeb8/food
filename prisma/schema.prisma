@@ -12,10 +12,10 @@ model User {
   email       String      @unique
   password    String
   phoneNumber String
-  address     String
-  role        UserRoleEnum
-  isVerified  Boolean
-  createdAt   DateTime    @default(now())
+  role        UserRoleEnum @default(USER)
+  
+  address    String?
+  isVerified Boolean      @default(false)
   updatedAt   DateTime    @updatedAt
   orders      FoodOrder[]
 }
@@ -44,7 +44,7 @@ model Food {
 model FoodOrder {
   id             Int             @id @default(autoincrement())
   totalPrice     Float                       
-  status         FoodOrderStatusEnum
+  status         FoodOrderStatusEnum @default(PENDING)
   userId         Int
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
