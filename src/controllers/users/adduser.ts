@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { comparePassword, hashPassword } from "../../services/hash-service";
 import { generateToken } from "../../services/jwt-service";
+import { AuthRequest } from "../../middleware/auth-middleware";
 
 const SECRET = process.env.JWT_SECRET;
 
@@ -72,6 +73,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     const token = generateToken({
       id: String(user.id),
       email: user.email,
+      role: user.role,
     });
 
     res.status(200).json({
@@ -85,5 +87,20 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   } catch (err: any) {
     console.error("Login Error:", err);
     res.status(500).json({ error: "Internal server error" });
+  }
+};
+export const profile = async (req: AuthRequest, res: Response) => {
+  try {
+    // req.user.id comes from the decoded JWT
+    const user = await prisma.user.findUnique({
+      where: { id: Number(req.user.id) },
+      select: { id: true, email: true, address: true }, // Don't return the password!
+    });
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
   }
 };

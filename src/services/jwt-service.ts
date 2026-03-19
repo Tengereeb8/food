@@ -4,6 +4,7 @@ import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
 interface TokenPayload {
   id: string;
   email: string;
+  role: string;
 }
 
 // Generate JWT token
@@ -15,7 +16,7 @@ export const generateToken = (payload: TokenPayload): string => {
   }
 
   const options: SignOptions = {
-    expiresIn: "1h",
+    expiresIn: "3h",
   };
 
   return jwt.sign(payload, secret, options);
