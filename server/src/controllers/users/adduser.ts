@@ -3,6 +3,9 @@ import { PrismaClient } from "@prisma/client";
 import { comparePassword, hashPassword } from "../../services/hash-service";
 import { generateToken } from "../../services/jwt-service";
 import { AuthRequest } from "../../middleware/auth-middleware";
+// import { comparePassword, hashPassword } from "../../services/hash-service";
+// import { generateToken } from "../../services/jwt-service";
+// import { AuthRequest } from "../../middleware/auth-middleware";
 
 const SECRET = process.env.JWT_SECRET;
 
