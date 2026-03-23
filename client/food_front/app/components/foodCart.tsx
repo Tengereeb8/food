@@ -32,7 +32,7 @@ export const FoodCart = async () => {
     <div className="p-10 font-inter">
       {categoryData.map((category) => (
         <div key={category.id} className="mb-10">
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="text-xl font-semibold mb-4 text-white">
             {category.categoryName}
           </h2>
 
