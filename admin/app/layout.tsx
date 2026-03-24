@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 // layout.tsx
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import "./globals.css"; // Ensure your tailwind styles are imported
-import { AppSidebar } from "./components/side";
+import { SideBar } from "./components/side";
 
 export default function RootLayout({
   children,
@@ -29,10 +29,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#f4f4f5]">
+      <body className="bg-[#f4f4f5] font-inter">
         <SidebarProvider>
-          <div className="flex min-h-screen w-full">
-            <AppSidebar />
+          <div className="flex min-h-screen w-full ">
+            <SideBar />
             <main className="flex-1 p-6">{children}</main>
           </div>
         </SidebarProvider>
