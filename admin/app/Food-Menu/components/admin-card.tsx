@@ -58,7 +58,7 @@ export const AdminFoodCart = () => {
         </p>
       </div>
 
-      <DialogContent className="sm:max-w-sm">
+      <DialogContent className="sm:max-w-118 sm:max-h-149">
         <form onSubmit={(e) => e.preventDefault()}>
           <DialogHeader>
             <DialogTitle>Dishes Info</DialogTitle>
@@ -66,55 +66,96 @@ export const AdminFoodCart = () => {
 
           <FieldGroup className="py-4">
             <Field>
-              <Label htmlFor="dish-name">Dish Name</Label>
-              <Input id="dish-name" defaultValue="Brie Crostini Appetizer" />
-            </Field>
-            <Field>
-              <Label htmlFor="dish-category">Dish category</Label>
-              <Input id="dish-category" defaultValue="Appetizerj" />
-            </Field>
-            <Field>
-              <Label htmlFor="dish-ingredients">Ingredients</Label>
-              <Input id="dish-ingredient" defaultValue="12.99" />
-            </Field>
-            <Field>
-              <Label htmlFor="dish-price">Price</Label>
-              <Input
-                id="dish-price"
-                defaultValue="12.99"
-                type="float"
-                step="0.01"
-              />
-            </Field>
-            <Field>
-              <Label>Dish Image</Label>
-
-              <div
-                onClick={triggerFileInput}
-                className="mt-2 cursor-pointer w-full h-40 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center overflow-hidden hover:bg-gray-50 transition-all"
-              >
-                {preview ? (
-                  <img
-                    src={preview}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <div className="flex flex-col items-center gap-2 text-gray-400">
-                    <ImagePlusIcon className="w-8 h-8" />
-                    <span className="text-xs">Click to upload photo</span>
-                  </div>
-                )}
+              <div className="flex justify-between">
+                <Label
+                  htmlFor="dish-name"
+                  className="flex text-xs text-[#71717a]"
+                >
+                  Dish Name
+                </Label>
+                <Input
+                  className="w-72 text-xs text-[#71717a]"
+                  id="dish-name"
+                  defaultValue="Brie Crostini Appetizer"
+                />
               </div>
+            </Field>
+            <Field>
+              <div className="flex justify-between">
+                <Label
+                  htmlFor="dish-category"
+                  className="flex text-xs text-[#71717a]"
+                >
+                  Dish category
+                </Label>
 
-              <Input
-                id="dish-image"
-                type="file"
-                accept="image/*"
-                className="hidden"
-                ref={fileInputRef}
-                onChange={handleImageChange}
-              />
+                <Input
+                  className="w-72 text-xs text-[#71717a]"
+                  id="dish-category"
+                  defaultValue="Appetizerj"
+                />
+              </div>
+            </Field>
+            <Field>
+              <div className="flex justify-between">
+                <Label
+                  htmlFor="dish-ingredients"
+                  className="text-xs text-[#71717a]"
+                >
+                  Ingredients
+                </Label>
+                <Input
+                  className="w-72 text-xs text-[#71717a]"
+                  id="dish-ingredient"
+                  defaultValue="12.99"
+                />
+              </div>
+            </Field>
+            <Field>
+              <div className="flex justify-between">
+                <Label htmlFor="dish-price" className="text-xs text-[#71717a]">
+                  Price
+                </Label>
+                <Input
+                  className="w-72 text-xs text-[#71717a]"
+                  id="dish-price"
+                  defaultValue="12.99"
+                  type="float"
+                  step="0.01"
+                />
+              </div>
+            </Field>
+            <Field>
+              <div className="flex justify-between">
+                <Label className="text-xs text-[#71717a]">Dish Image</Label>
+
+                <div
+                  onClick={triggerFileInput}
+                  className="mt-2 cursor-pointer w-72 h-29 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center overflow-hidden hover:bg-gray-50 transition-all"
+                >
+                  {preview ? (
+                    <img
+                      src={preview}
+                      alt="Preview"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center gap-2 text-gray-400">
+                      <ImagePlusIcon className="w-8 h-8" />
+                      <span className="text-xs">Click to upload photo</span>
+                    </div>
+                  )}
+                </div>
+
+                <Input
+                  id="dish-image"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  ref={fileInputRef}
+                  onChange={handleImageChange}
+                />
+              </div>
             </Field>
           </FieldGroup>
 
