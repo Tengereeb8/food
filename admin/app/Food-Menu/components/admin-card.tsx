@@ -1,4 +1,6 @@
 "use client";
+import { useState, useRef } from "react";
+import { ImagePlusIcon } from "lucide-react"; // Nice icon for uploads
 import { PencilIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,9 +18,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export const AdminFoodCart = () => {
+  const [preview, setPreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Create a temporary URL for the selected file
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
+  };
   return (
     <Dialog>
-      <div className="w-67.75 h-60.25 rounded-[20px] border border-[#e4e4e7] p-4">
+      <div className="w-67.75 h-fit rounded-[20px] border border-[#e4e4e7] p-4">
         <div className="relative">
           <img
             src="/app.png"
@@ -54,36 +70,59 @@ export const AdminFoodCart = () => {
               <Input id="dish-name" defaultValue="Brie Crostini Appetizer" />
             </Field>
             <Field>
-              <Label htmlFor="dish-price">Dish category</Label>
-              <Input id="dish-price" defaultValue="Appetizerj" />
+              <Label htmlFor="dish-category">Dish category</Label>
+              <Input id="dish-category" defaultValue="Appetizerj" />
             </Field>
             <Field>
-              <Label htmlFor="dish-price">Ingredients</Label>
-              <Input id="dish-price" defaultValue="12.99" />
+              <Label htmlFor="dish-ingredients">Ingredients</Label>
+              <Input id="dish-ingredient" defaultValue="12.99" />
             </Field>
             <Field>
               <Label htmlFor="dish-price">Price</Label>
               <Input
                 id="dish-price"
                 defaultValue="12.99"
-                type="number"
+                type="float"
                 step="0.01"
               />
             </Field>
             <Field>
-              <Label htmlFor="dish-price">Price</Label>
+              <Label>Dish Image</Label>
+
+              <div
+                onClick={triggerFileInput}
+                className="mt-2 cursor-pointer w-full h-40 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center overflow-hidden hover:bg-gray-50 transition-all"
+              >
+                {preview ? (
+                  <img
+                    src={preview}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center gap-2 text-gray-400">
+                    <ImagePlusIcon className="w-8 h-8" />
+                    <span className="text-xs">Click to upload photo</span>
+                  </div>
+                )}
+              </div>
+
               <Input
-                id="dish-price"
-                defaultValue="12.99"
-                type="number"
-                step="0.01"
+                id="dish-image"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                ref={fileInputRef}
+                onChange={handleImageChange}
               />
             </Field>
           </FieldGroup>
 
           <DialogFooter>
             <div role="delete"></div>
-            <div role="submit">Save Changes</div>
+            <Button role="submit" className="bg-black text-white">
+              Save Changes
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

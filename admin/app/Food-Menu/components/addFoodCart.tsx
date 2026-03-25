@@ -1,4 +1,6 @@
 "use client";
+import { useState, useRef } from "react";
+import { ImagePlusIcon } from "lucide-react"; // Nice icon for uploads
 import { CirclePlusIcon, PencilIcon, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -17,6 +19,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export const AddFoodCart = () => {
+  const [preview, setPreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
+  };
   return (
     <Dialog>
       <DialogTrigger>
@@ -39,9 +54,6 @@ export const AddFoodCart = () => {
         >
           <DialogHeader>
             <DialogTitle>Add New Dish to Appetizers</DialogTitle>
-            {/* <DialogDescription>
-              Enter the details for the new appetizer.
-            </DialogDescription> */}
           </DialogHeader>
 
           <FieldGroup className="py-4">
@@ -74,12 +86,33 @@ export const AddFoodCart = () => {
               />
             </Field>
             <Field>
-              <Label htmlFor="price">Price</Label>
+              <Label>Dish Image</Label>
+
+              <div
+                onClick={triggerFileInput}
+                className="mt-2 cursor-pointer w-full h-40 border-2 border-dashed border-gray-200 rounded-xl flex flex-col items-center justify-center overflow-hidden hover:bg-gray-50 transition-all"
+              >
+                {preview ? (
+                  <img
+                    src={preview}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center gap-2 text-gray-400">
+                    <ImagePlusIcon className="w-8 h-8" />
+                    <span className="text-xs">Click to upload photo</span>
+                  </div>
+                )}
+              </div>
+
               <Input
-                id="price"
-                name="price"
-                type="number"
-                placeholder="Enter price...`"
+                id="dish-image"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                ref={fileInputRef}
+                onChange={handleImageChange}
               />
             </Field>
           </FieldGroup>

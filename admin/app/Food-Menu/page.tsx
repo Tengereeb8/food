@@ -1,5 +1,5 @@
-import { Category } from "../components/disher-category";
 import { AdminFood } from "../components/food-admin";
+import { Category } from "./components/disher-category";
 
 const Menu = async () => {
   return (

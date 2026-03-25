@@ -1,5 +1,5 @@
-import { AddFoodCart } from "./addFoodCart";
-import { AdminFoodCart } from "./admin-card";
+import { AddFoodCart } from "../Food-Menu/components/addFoodCart";
+import { AdminFoodCart } from "../Food-Menu/components/admin-card";
 
 export const AdminFood = async () => {
   return (
