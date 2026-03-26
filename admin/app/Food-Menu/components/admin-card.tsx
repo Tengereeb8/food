@@ -5,9 +5,7 @@ import { PencilIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -16,15 +14,23 @@ import {
 import { Field, FieldGroup } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
+import { Food } from "./category/getCategory";
 
-export const AdminFoodCart = () => {
+type AdminFoodCartProps = {
+  food: Food;
+};
+
+export const AdminFoodCart = ({ food }: AdminFoodCartProps) => {
+  console.log(food);
+
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Create a temporary URL for the selected file
       setPreview(URL.createObjectURL(file));
     }
   };
@@ -34,7 +40,7 @@ export const AdminFoodCart = () => {
   };
   return (
     <Dialog>
-      <div className="w-67.75 h-fit rounded-[20px] border border-[#e4e4e7] p-4">
+      <div className="w-67.75 h-60.25 rounded-[20px] border border-[#e4e4e7] p-4">
         <div className="relative">
           <img
             src="/app.png"
@@ -50,12 +56,10 @@ export const AdminFoodCart = () => {
         </div>
 
         <h1 className="text-red-500 font-medium text-sm pt-5 flex justify-between">
-          Brie Crostini Appetizer{" "}
-          <span className="text-black text-xs ml-2">$12.99</span>
+          {food.foodName}
+          <span className="text-black text-xs ml-2">{food.price}</span>
         </h1>
-        <p className="text-xs text-gray-500 mt-2">
-          Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.
-        </p>
+        <p className="text-xs text-gray-500 mt-2">{food.ingredients}</p>
       </div>
 
       <DialogContent className="sm:max-w-118 sm:max-h-149">
@@ -76,7 +80,7 @@ export const AdminFoodCart = () => {
                 <Input
                   className="w-72 text-xs text-[#71717a]"
                   id="dish-name"
-                  defaultValue="Brie Crostini Appetizer"
+                  defaultValue={food.foodName}
                 />
               </div>
             </Field>

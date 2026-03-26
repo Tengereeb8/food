@@ -14,7 +14,9 @@ export interface Category {
 
 export interface Food {
   id: number;
-  name: string;
+  image: string;
+  ingredients: string;
+  foodName: string;
   price: string;
   foodCategoryId: number;
   createdAt: string;
@@ -22,22 +24,37 @@ export interface Food {
 }
 
 export const GetCategories = async () => {
-  const response = await fetch("http://localhost:3001/categories", {
-    cache: "no-store",
-  });
+  try {
+    const response = await fetch("http://127.0.0.1:3001/categories", {
+      cache: "no-store",
+    });
 
-  const data: GetCategoriesResponse = await response.json();
+    if (!response.ok) throw new Error("Backend response not OK");
 
-  return (
-    <div className="flex flex-wrap gap-3">
-      {data.categories?.map((category: any) => (
-        <Badge
-          key={category.id}
-          className="px-4 py-2 h-9 text-sm border border-[#e4e4e7] bg-white text-black hover:bg-gray-50 transition-colors"
-        >
-          {category.categoryName}
-        </Badge>
-      ))}
-    </div>
-  );
+    const data = await response.json();
+
+    const categoriesArray = Array.isArray(data) ? data : data.categories;
+
+    return (
+      <div className="flex flex-wrap gap-3">
+        {categoriesArray?.map((category: any) => (
+          <Badge
+            key={category.id}
+            variant="outline"
+            className="px-4 py-2 h-9 text-sm border-[#e4e4e7] bg-white text-black flex gap-2 items-center"
+          >
+            <span className="font-medium">
+              {category.categoryName || category.name}
+            </span>
+
+            <span className="text-white text-xs bg-black px-1.5 py-0.5 rounded-full">
+              {category.foods?.length || 0}
+            </span>
+          </Badge>
+        ))}
+      </div>
+    );
+  } catch (error) {
+    console.error("Fetch failed:", error);
+  }
 };

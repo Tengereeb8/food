@@ -15,12 +15,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ChangeEventHandler, useState } from "react";
 import { Loader } from "lucide-react";
-import { GetCategories } from "./getCategory";
+import { useRouter } from "next/navigation";
 
 export const AddCategory = () => {
   const [open, setOpen] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const onChange: ChangeEventHandler<HTMLInputElement, HTMLInputElement> = (
     event,
@@ -35,7 +36,7 @@ export const AddCategory = () => {
     };
 
     try {
-      await fetch("http://0.0.0.0:3001/categories", {
+      await fetch("http://localhost:3001/categories", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,6 +44,7 @@ export const AddCategory = () => {
         body: JSON.stringify(postBody),
       });
       setOpen(false);
+      router.refresh();
     } catch (error) {
       console.error(error);
     }
@@ -51,7 +53,6 @@ export const AddCategory = () => {
 
   return (
     <div className="bg-white p-6 rounded-xl w-fit">
-      <h1 className="pb-4">Dishes category</h1>
       <div className=" flex gap-3 items-center">
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger>
