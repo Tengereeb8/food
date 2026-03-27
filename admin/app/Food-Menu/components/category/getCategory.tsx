@@ -10,6 +10,7 @@ export interface Category {
   createdAt: string;
   updatedAt: string;
   foods: Food[];
+  categoryName: string;
 }
 
 export interface Food {
@@ -37,7 +38,7 @@ export const GetCategories = async () => {
 
     return (
       <div className="flex flex-wrap gap-3">
-        {categoriesArray?.map((category: any) => (
+        {categoriesArray?.map((category: Category) => (
           <Badge
             key={category.id}
             variant="outline"

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, ChangeEventHandler } from "react";
+import { useState, useRef, ChangeEventHandler, ChangeEvent } from "react";
 import { ImagePlusIcon, Plus, Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -33,7 +33,7 @@ export const AddFoodCart = ({ categoryId }: AddFoodCartProps) => {
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setPreview(URL.createObjectURL(file));
@@ -80,14 +80,17 @@ export const AddFoodCart = ({ categoryId }: AddFoodCartProps) => {
           <div className="size-10 bg-red-500 rounded-full flex items-center justify-center">
             <Plus className="w-4 h-4 text-white" />
           </div>
-          <h1 className="text-center font-medium">Add new Dish</h1>
+          <h1 className="text-center font-medium ">Add new Dish</h1>
         </div>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-md">
         <form onSubmit={onAddDish}>
           <DialogHeader>
-            <DialogTitle>Add New Dish</DialogTitle>
+            <DialogTitle>
+              {" "}
+              <p className="text-lg">Add New Dish</p>
+            </DialogTitle>
           </DialogHeader>
 
           <FieldGroup className="py-4 space-y-4">

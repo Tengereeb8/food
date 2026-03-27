@@ -48,9 +48,12 @@ export const AdminFood = async () => {
 
             <div className="flex flex-wrap gap-4">
               <AddFoodCart categoryId={category.id} />
-
-              {category.foods?.map((food: Food) => (
-                <AdminFoodCart key={food.id} food={food} />
+              {category.foods.map((food: Food) => (
+                <AdminFoodCart
+                  key={food.id}
+                  food={food}
+                  categories={categoriesArray} // pass all categories for the selector
+                />
               ))}
             </div>
           </div>

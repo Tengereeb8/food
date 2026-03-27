@@ -9,6 +9,6 @@ const router = express();
 router.get("", getFood);
 router.post("", addFood);
 router.delete("/:id", deleteFood);
-router.put("/:id", updateFood);
+router.patch("/:id", updateFood);
 
 export default router;
