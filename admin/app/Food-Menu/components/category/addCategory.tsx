@@ -1,6 +1,6 @@
 "use client";
 import { Badge } from "@/components/ui/badge";
-import { CirclePlusIcon, Plus } from "lucide-react";
+import { Check, CirclePlusIcon, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
