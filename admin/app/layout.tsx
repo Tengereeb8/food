@@ -31,10 +31,8 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-[#f4f4f5] font-inter">
         <SidebarProvider>
-          <div className="flex min-h-screen w-full  ">
-            <SideBar />
-            <main className="flex-1 p-6">{children}</main>
-          </div>
+          <SideBar />
+          <main className="flex-1 p-6">{children}</main>
         </SidebarProvider>
       </body>
     </html>

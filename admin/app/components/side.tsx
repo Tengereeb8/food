@@ -1,73 +1,9 @@
-// import {
-//   Sidebar,
-//   SidebarContent,
-//   SidebarFooter,
-//   SidebarGroup,
-//   SidebarGroupContent,
-//   SidebarHeader,
-//   SidebarMenu,
-//   SidebarMenuButton,
-//   SidebarMenuItem,
-// } from "@/components/ui/sidebar";
-// import { Badge } from "@/components/ui/badge";
-// import { LayoutDashboardIcon, TruckIcon } from "lucide-react";
-// import Link from "next/link";
-
-// export function AppSidebar() {
-//   return (
-//     <Sidebar className="border-r">
-//       <SidebarHeader className="px-5 py-9">
-//         <div className="flex gap-2 items-center px-4">
-//           <img src="/logo.png" alt="Logo" className="w-8 h-8" />
-//           <p className="font-bold flex flex-col text-lg leading-tight">
-//             NomNom
-//             <span className="text-[#71717a] text-xs font-normal">
-//               Swift Delivery
-//             </span>
-//           </p>
-//         </div>
-//       </SidebarHeader>
-
-//       <SidebarContent className="px-5">
-//         <SidebarGroup>
-//           <SidebarGroupContent>
-//             <SidebarMenu className="gap-2">
-//               <SidebarMenuItem>
-//                 <SidebarMenuButton className="h-10 px-4 gap-2.5 flex rounded-full ">
-//                   <Link href="/Food-Menu">
-//                     <LayoutDashboardIcon size={20} className="shrink-0" />
-//                     <span className="text-sm font-medium">Food Menu</span>
-//                   </Link>
-//                 </SidebarMenuButton>
-//               </SidebarMenuItem>
-
-//               <SidebarMenuItem>
-//                 <SidebarMenuButton
-//                   className="h-10 px-4 gap-2.5 border-gray-200 shadow-none hover:bg-gray-50"
-//                 >
-//                   <Link href="/orders">
-//                     <TruckIcon size={20} className="text-black shrink-0" />
-//                     <span className="text-sm text-black font-medium">
-//                       Orders
-//                     </span>
-//                   </Link>
-//                 </SidebarMenuButton>
-//               </SidebarMenuItem>
-//             </SidebarMenu>
-//           </SidebarGroupContent>
-//         </SidebarGroup>
-//       </SidebarContent>
-
-//       <SidebarFooter />
-//     </Sidebar>
-//   );
-// }
-
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sidebar, SidebarContent } from "@/components/ui/sidebar";
 import { LayoutDashboard, TruckIcon } from "lucide-react";
+import Link from "next/link";
 
 export const SideBar = () => {
   const [clicked, setClicked] = useState("foodMenu");
@@ -88,20 +24,25 @@ export const SideBar = () => {
           </div>
         </div>
         <SidebarContent className="flex flex-col gap-4 ">
-          <Button
-            onClick={() => handleToggle("foodMenu")}
-            className={`relative top-18 w-41.25 h-10 justify-center gap-2.5 rounded-full px-6 transition-all ${changeColor("foodMenu")}`}
-          >
-            <LayoutDashboard className="size-5.5" />
-            <span>Food menu</span>
-          </Button>
-          <Button
-            onClick={() => handleToggle("orders")}
-            className={`relative top-18 w-41.25 h-10 justify-start gap-3 rounded-full px-8.25 transition-all ${changeColor("orders")}`}
-          >
-            <TruckIcon className="size-5.5" />
-            <span>Orders</span>
-          </Button>
+          <Link href={"/food-menu"}>
+            <Button
+              onClick={() => handleToggle("foodMenu")}
+              className={`relative top-18 w-41.25 h-10 justify-center gap-2.5 rounded-full px-6 transition-all ${changeColor("foodMenu")}`}
+            >
+              <LayoutDashboard className="size-5.5" />
+
+              <span>Food menu</span>
+            </Button>
+          </Link>
+          <Link href={"/order"}>
+            <Button
+              onClick={() => handleToggle("orders")}
+              className={`relative top-18 w-41.25 h-10 justify-start gap-3 rounded-full px-8.25 transition-all ${changeColor("orders")}`}
+            >
+              <TruckIcon className="size-5.5" />
+              <span>Orders</span>
+            </Button>
+          </Link>
         </SidebarContent>
       </Sidebar>
     </div>
