@@ -14,8 +14,8 @@ model User {
   phoneNumber String
   role        UserRoleEnum @default(USER)
   
-  address    String?
-  isVerified Boolean      @default(false)
+  address     String?
+  isVerified  Boolean      @default(false)
   updatedAt   DateTime    @updatedAt
   orders      FoodOrder[]
 }

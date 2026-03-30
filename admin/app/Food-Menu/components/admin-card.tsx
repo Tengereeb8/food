@@ -137,15 +137,11 @@ export const AdminFoodCart = ({ food, categories }: AdminFoodCartProps) => {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      {categories.map(
-                        (
-                          cat, // ← now lists all category names
-                        ) => (
-                          <SelectItem key={cat.id} value={String(cat.id)}>
-                            {cat.categoryName}
-                          </SelectItem>
-                        ),
-                      )}
+                      {categories.map((cat) => (
+                        <SelectItem key={cat.id} value={String(cat.id)}>
+                          {cat.categoryName}
+                        </SelectItem>
+                      ))}
                     </SelectGroup>
                   </SelectContent>
                 </Select>
