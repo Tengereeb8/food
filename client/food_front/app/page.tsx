@@ -1,14 +1,16 @@
-import { FoodCart } from "./components/foodCart";
-import App from "./navigation";
+import SignIn from "./sign-in/page";
 
-const Home = async () => {
+const Home = () => {
+  // const categories = await fetch("http://localhost:3002/api/categories");
+  // const data = await categories.json();
+  // console.log(data);
+
   return (
-    <div className="flex mx-auto flex-col text-black  font-sans">
-      <header>
-        <img src="/food.png" alt="" className="max-w-360 h-142.5" />
-      </header>
-      <FoodCart />
-      <App />
+    <div className="flex items-center mx-auto">
+      <div className="flex ">
+        <SignIn />
+      </div>
+      <img src="/login.jpg" alt="Aa" className="w-214" />
     </div>
   );
 };

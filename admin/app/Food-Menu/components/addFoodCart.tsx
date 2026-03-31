@@ -83,7 +83,6 @@ export const AddFoodCart = ({ categoryId }: AddFoodCartProps) => {
         setOpen(false);
         setShowAlert(true);
 
-        // Reset fields so the next time you open the modal, it's empty
         setFood({
           foodName: "",
           price: 0,

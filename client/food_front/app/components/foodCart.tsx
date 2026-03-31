@@ -10,8 +10,6 @@ interface Category {
   categoryName: string;
   foods: Food[];
 }
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardAction,
@@ -47,7 +45,7 @@ export const FoodCart = async () => {
                 <img
                   src="https://www.sargento.com/assets/Uploads/Recipe/Image/GreatAmericanBurger.jpg"
                   alt={food.foodName}
-                  className="relative z-20 aspect-video w-full object-cover "
+                  className="relative  w-full object-cover p-4 rounded-xl overflow-hidden"
                 />
 
                 <CardHeader>
@@ -64,8 +62,6 @@ export const FoodCart = async () => {
 
                   <CardDescription>{food.ingredients}</CardDescription>
                 </CardHeader>
-
-                <CardFooter className="flex flex-col gap-2"></CardFooter>
               </Card>
             ))}
           </div>
