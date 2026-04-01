@@ -3,20 +3,15 @@ import { PrismaClient } from "@prisma/client";
 import { comparePassword, hashPassword } from "../../services/hash-service";
 import { generateToken } from "../../services/jwt-service";
 import { AuthRequest } from "../../middleware/auth-middleware";
-// import { comparePassword, hashPassword } from "../../services/hash-service";
-// import { generateToken } from "../../services/jwt-service";
-// import { AuthRequest } from "../../middleware/auth-middleware";
 
 const SECRET = process.env.JWT_SECRET;
 
 const prisma = new PrismaClient();
 
-// 1. Register User
 export const addUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password, name, phoneNumber, address } = req.body;
 
-    // Check if user already exists
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
@@ -54,7 +49,6 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
 
-    // Find user by email
     const user = await prisma.user.findUnique({
       where: { email },
     });
@@ -64,15 +58,12 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Compare hashed password
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {
       res.status(401).json({ message: "Invalid email or password" });
       return;
     }
 
-    // Generate JWT Token
-    // Ensure your generateToken function accepts this payload shape
     const token = generateToken({
       id: String(user.id),
       email: user.email,
@@ -94,10 +85,9 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 };
 export const profile = async (req: AuthRequest, res: Response) => {
   try {
-    // req.user.id comes from the decoded JWT
     const user = await prisma.user.findUnique({
       where: { id: Number(req.user.id) },
-      select: { id: true, email: true, address: true }, // Don't return the password!
+      select: { id: true, email: true, address: true },
     });
 
     if (!user) return res.status(404).json({ message: "User not found" });
