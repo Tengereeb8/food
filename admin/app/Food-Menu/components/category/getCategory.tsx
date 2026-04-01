@@ -27,16 +27,22 @@ export interface Food {
 
 export const GetCategories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const [selectedId, setSelectedId] = useState<number | null>(null); // null = All Dishes
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:3001/categories")
+  const fetchCategories = () => {
+    fetch("http://127.0.0.1:3001/categories", {
+      cache: "no-store",
+    })
       .then((res) => res.json())
       .then((data) => {
         const arr = Array.isArray(data) ? data : data.categories;
         setCategories(arr);
       })
       .catch(console.error);
+  };
+
+  useEffect(() => {
+    fetchCategories();
   }, []);
 
   const totalFoods = categories.reduce(
@@ -111,7 +117,7 @@ export const GetCategories = () => {
               {category.categoryName} ({category.foods?.length})
             </h1>
             <div className="flex flex-wrap gap-4">
-              <AddFoodCart categoryId={category.id} />
+              <AddFoodCart categoryId={category.id} refetch={fetchCategories} />{" "}
               {category.foods.map((food) => (
                 <AdminFoodCart
                   key={food.id}

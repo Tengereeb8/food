@@ -36,8 +36,8 @@ export default function RootLayout({
               <SideBar />
             </aside>
 
-            <div className="flex flex-col  ">
-              <header className=" flex items-center justify-end w-fit px-6 shadow-sm ">
+            <div className="flex flex-col  w-screen">
+              <header className=" flex items-center justify-end w-full px-6 shadow-sm ">
                 <Header />
               </header>
               <main className="flex-1 overflow-y-auto h-full  ">

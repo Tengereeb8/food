@@ -25,9 +25,10 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface AddFoodCartProps {
   categoryId: number;
+  refetch: () => void;
 }
 
-export const AddFoodCart = ({ categoryId }: AddFoodCartProps) => {
+export const AddFoodCart = ({ categoryId, refetch }: AddFoodCartProps) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -83,16 +84,7 @@ export const AddFoodCart = ({ categoryId }: AddFoodCartProps) => {
         setOpen(false);
         setShowAlert(true);
 
-        setFood({
-          foodName: "",
-          price: 0,
-          foodCategoryId: categoryId,
-          ingredients: "",
-          image: "",
-        });
-        setPreview(null);
-
-        router.refresh();
+        refetch();
       }
     } catch (error) {
       console.error("Failed to add dish:", error);
