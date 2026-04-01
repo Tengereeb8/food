@@ -19,7 +19,7 @@ const SignIn = () => {
       const data = await signIn(credentials);
 
       localStorage.setItem("token", data?.token);
-      router.push("http://localhost:3002/order-home");
+      router.push("http://localhost:3000/food-menu");
     } catch (error) {
       console.error(error);
     }

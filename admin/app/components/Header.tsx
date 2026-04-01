@@ -9,12 +9,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { getUser } from "../auth/GetUser";
+import Link from "next/link";
 
 export const Header = async () => {
   const user = await getUser();
 
   return (
-    <div>
+    <div className="font-inter">
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Button variant="ghost" size="icon" className="rounded-full">
@@ -24,14 +25,16 @@ export const Header = async () => {
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-32">
+        <DropdownMenuContent className="w-fit">
           <DropdownMenuGroup>
             <DropdownMenuItem>{user.email}</DropdownMenuItem>
             <DropdownMenuItem>{user.address}</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem variant="destructive">Log out</DropdownMenuItem>
+            <Link href={"http://localhost:3002"}>
+              <DropdownMenuItem variant="destructive">Log out</DropdownMenuItem>
+            </Link>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
