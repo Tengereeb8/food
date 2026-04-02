@@ -4,6 +4,7 @@ import "./globals.css";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { SideBar } from "./components/side";
 import { Header } from "./components/Header";
+import { CartContextProvider } from "../../client/food_front/app/contexts/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,11 +38,11 @@ export default function RootLayout({
             </aside>
 
             <div className="flex flex-col  w-screen">
-              <header className=" flex items-center justify-end w-full px-6 shadow-sm ">
+              <header className=" flex items-center justify-center w-full px-6 shadow-sm ">
                 <Header />
               </header>
               <main className="flex-1 overflow-y-auto h-full  ">
-                {children}
+                <CartContextProvider>{children}</CartContextProvider>
               </main>
             </div>
           </div>
