@@ -6,12 +6,12 @@ import userRouter from "./router/user.router";
 import foodsRouter from "./router/foods.router";
 import categoryRouter from "./router/category.router";
 import orderRouter from "./router/order.router";
+
 dotenv.config();
 
 const app = express();
 app.use(cors());
 const prisma = new PrismaClient();
-const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 
@@ -20,6 +20,4 @@ app.use("/foods", foodsRouter);
 app.use("/categories", categoryRouter);
 app.use("/orders", orderRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+export default app;
