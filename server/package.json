@@ -4,8 +4,8 @@
   "description": "Express API with Neon and Prisma",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/index.ts",
-    "build": "prisma generate && tsc",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
     "start": "node dist/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
@@ -31,21 +31,5 @@
     "prisma": "^5.22.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
-  },
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "rootDir": "src",
-    "outDir": "dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "typeRoots": [
-      "./src/types",
-      "./node_modules/@types"
-    ]
-  },
-  "include": [
-    "src"
-  ]
+  }
 }
