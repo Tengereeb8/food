@@ -11,5 +11,6 @@ export const getFood = async (req: Request, res: Response) => {
     res.json(food);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch food" });
+    console.log(error);
   }
 };
