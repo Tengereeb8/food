@@ -74,7 +74,7 @@ export const AddFoodCart = ({ categoryId, refetch }: AddFoodCartProps) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:3001/foods", {
+      const response = await fetch("https://food-r2o4.onrender.com/foods", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(food),

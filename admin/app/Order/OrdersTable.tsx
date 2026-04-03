@@ -59,7 +59,7 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
     setOrders((prev) =>
       prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o)),
     );
-    await fetch(`http://127.0.0.1:3001/orders/${orderId}`, {
+    await fetch(`https://food-r2o4.onrender.com/orders/${orderId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: newStatus }),
@@ -78,7 +78,7 @@ export default function OrdersTable({ initialOrders }: OrdersTableProps) {
 
     await Promise.all(
       idsToUpdate.map((id) =>
-        fetch(`http://127.0.0.1:3001/orders/${id}`, {
+        fetch(`https://food-r2o4.onrender.com/orders/${id}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ status: tempStatus }),

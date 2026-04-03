@@ -30,7 +30,7 @@ export const GetCategories = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const fetchCategories = () => {
-    fetch("http://127.0.0.1:3001/categories", {
+    fetch("https://food-r2o4.onrender.com/categories", {
       cache: "no-store",
     })
       .then((res) => res.json())

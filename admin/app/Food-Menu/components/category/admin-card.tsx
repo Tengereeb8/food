@@ -49,16 +49,19 @@ export const AdminFoodCart = ({ food, categories }: AdminFoodCartProps) => {
 
   const handleSave = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:3001/foods/${food.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          foodName,
-          ingredients,
-          price,
-          foodCategoryId: Number(selectedCategoryId),
-        }),
-      });
+      const res = await fetch(
+        `https://food-r2o4.onrender.com/foods/${food.id}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            foodName,
+            ingredients,
+            price,
+            foodCategoryId: Number(selectedCategoryId),
+          }),
+        },
+      );
       if (!res.ok) throw new Error("Failed to update food");
       router.refresh();
     } catch (err) {
