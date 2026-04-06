@@ -1,4 +1,4 @@
-import { getUser } from "../server/auth/getUser";
+import { getUser } from "../../../../admin/app/server/auth/getUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {

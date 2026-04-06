@@ -138,7 +138,7 @@
 "use client";
 
 import { useState, useEffect, useContext } from "react";
-import { PlusIcon } from "lucide-react";
+import { MinusCircleIcon, PlusCircleIcon, PlusIcon } from "lucide-react";
 import {
   Card,
   CardDescription,
@@ -153,6 +153,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { CartContext } from "../contexts/CartContext";
+import { Button } from "@/components/ui/button";
 
 interface Food {
   id: number;
@@ -168,10 +169,17 @@ interface Category {
 }
 
 export const FoodCart = () => {
-  // Get addCard from your context
+  const [quantity, setQuantity] = useState(1);
   const { addCard } = useContext(CartContext);
   const [categoryData, setCategoryData] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const addQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+  const decreaseQuantity = () => {
+    setQuantity(quantity - 1);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -208,35 +216,58 @@ export const FoodCart = () => {
                   <img
                     src="https://www.sargento.com/assets/Uploads/Recipe/Image/GreatAmericanBurger.jpg"
                     alt={food.foodName}
-                    className="w-full h-40 object-cover rounded-xl"
+                    className="w-full h-52.5 object-cover rounded-xl"
                   />
 
                   <Dialog>
                     <DialogTrigger>
-                      <button
-                        onClick={() => addCard(food, 1)}
-                        className="absolute bottom-8 right-8 bg-white p-2 rounded-full shadow-lg w-10 h-10 flex justify-center items-center hover:bg-gray-100 transition-all active:scale-95 cursor-pointer z-40"
-                      >
+                      <button className="absolute bottom-16 right-8 bg-white p-2 rounded-full shadow-lg w-10 h-10 flex justify-center items-center hover:bg-gray-100 transition-all active:scale-95 cursor-pointer z-40">
                         <PlusIcon className="text-red-500 w-6 h-6" />
                       </button>
                     </DialogTrigger>
 
-                    <DialogContent className="sm:max-w-106.25">
-                      <DialogHeader>
+                    <DialogContent className="sm:max-w-206.5 h-103">
+                      {/* <DialogHeader>
                         <DialogTitle>{food.foodName}</DialogTitle>
-                      </DialogHeader>
-                      <div className="grid gap-4 py-4">
+                      </DialogHeader> */}
+                      <div className="flex ">
                         <img
                           src="https://www.sargento.com/assets/Uploads/Recipe/Image/GreatAmericanBurger.jpg"
                           alt={food.foodName}
-                          className="w-full h-48 object-cover rounded-lg"
+                          className="w-94.25 h-91 object-cover rounded-lg"
                         />
-                        <p className="text-sm text-gray-500">
-                          {food.ingredients}
-                        </p>
-                        <div className="flex justify-between items-center font-bold text-lg">
-                          <span>Total</span>
-                          <span className="text-red-500">${food.price}</span>
+                        <div className="p-6">
+                          <h2 className="text-3xl text-red-500  pb-3 ">
+                            {food.foodName}
+                          </h2>
+                          <p className="text-sm text-gray-500">
+                            {food.ingredients}
+                          </p>
+                          <div className="flex justify-between items-center pt-27 text-lg pb-6">
+                            <h1 className="flex flex-col w-64">
+                              <span className="text-base">Total price</span>
+                              <span className=" text-2xl font-bold">
+                                ${food.price}
+                              </span>
+                            </h1>
+                            <div className="flex items-center">
+                              <PlusCircleIcon
+                                onClick={addQuantity}
+                                className="w-11 h-11"
+                              />
+                              <p className="text-lg px-2">{quantity}</p>
+                              <MinusCircleIcon
+                                onClick={decreaseQuantity}
+                                className="w-11 h-11"
+                              />
+                            </div>
+                          </div>
+                          <Button
+                            className={`w-94.25 h-11 rounded-full`}
+                            onClick={() => addCard(food, quantity)}
+                          >
+                            Add to cart
+                          </Button>
                         </div>
                       </div>
                     </DialogContent>

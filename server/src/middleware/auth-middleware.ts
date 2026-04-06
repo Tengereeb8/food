@@ -11,19 +11,22 @@ export const authenticateToken = (
   next: NextFunction,
 ) => {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1]; // Extracts "TOKEN" from "Bearer TOKEN"
 
-  if (!token) {
-    return res
-      .status(401)
-      .json({ message: "Access denied. No token provided." });
+  if (!authHeader) {
+    console.log("No Authorization header found"); // Debugging
+    return res.status(401).json({ message: "No header provided" });
   }
+
+  // Handle both "Bearer <token>" and just "<token>"
+  const parts = authHeader.split(" ");
+  const token = parts.length === 2 ? parts[1] : parts[0];
 
   try {
     const decoded = verifyToken(token);
-    req.user = decoded; // Attach user info (id, email) to the request object
-    next(); // Move to the actual controller
+    req.user = decoded;
+    next();
   } catch (error) {
-    res.status(403).json({ message: "Invalid or expired token." });
+    console.error("JWT Verification Error:", error);
+    return res.status(403).json({ message: "Invalid token" });
   }
 };

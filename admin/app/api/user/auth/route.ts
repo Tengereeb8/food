@@ -22,15 +22,3 @@ export async function POST(request: Request) {
 
   return Response.json({ token: data.token });
 }
-
-export async function GET() {
-  const cookieStore = await cookies();
-
-  //   const token = cookieStore.get("token");
-
-  //   return Response.json({
-  //     token,
-  //     allCookies: cookieStore.getAll(), // optional: see everything
-  //   });
-  return console.log(cookieStore.getAll());
-}

@@ -2,8 +2,8 @@
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { signIn } from "../server/auth/signIn";
 import { useRouter } from "next/navigation";
+import { signIn } from "../server/auth/signIn";
 
 const SignIn = () => {
   const router = useRouter();
@@ -15,11 +15,11 @@ const SignIn = () => {
       email,
       password,
     };
+
     try {
       const data = await signIn(credentials);
-
-      localStorage.setItem("token", data?.token);
-      router.push("http://localhost:3002/order");
+      localStorage.set("token", data?.token, { expires: 7 });
+      router.push("/admin/food-menu");
     } catch (error) {
       console.error(error);
     }
@@ -53,8 +53,6 @@ const SignIn = () => {
       <p className="text-zinc-500 pt-6 ">
         Don't have an account? <span className="text-blue-500">Sign up</span>
       </p>
-      {/* <FoodCart /> */}
-      {/* <App /> */}
     </div>
   );
 };

@@ -8,7 +8,7 @@ type SignInResponse = {
 };
 
 export const signIn = async (credentials: Credentials) => {
-  const response = await fetch(" /api/user/auth", {
+  const response = await fetch("/api/user/auth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
