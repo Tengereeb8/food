@@ -7,7 +7,7 @@ export const getUser = async () => {
 
   if (!token) return;
 
-  const response = await fetch("http://localhost:3001/users/profile", {
+  const response = await fetch(`https://food-r2o4.onrender.com/users/profile`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
