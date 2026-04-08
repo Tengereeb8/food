@@ -24,7 +24,7 @@ export const SideBar = () => {
           </div>
         </div>
         <SidebarContent className="flex flex-col gap-4 ">
-          <Link href={"/food-menu"}>
+          <Link href={"/admin/food-menu"}>
             <Button
               onClick={() => handleToggle("foodMenu")}
               className={`relative top-18 w-41.25 h-10 justify-center gap-2.5 rounded-full px-6 transition-all ${changeColor("foodMenu")}`}
@@ -34,7 +34,7 @@ export const SideBar = () => {
               <span>Food menu</span>
             </Button>
           </Link>
-          <Link href={"/order"}>
+          <Link href={"/admin/order"}>
             <Button
               onClick={() => handleToggle("orders")}
               className={`relative top-18 w-41.25 h-10 justify-start gap-3 rounded-full px-8.25 transition-all ${changeColor("orders")}`}

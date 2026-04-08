@@ -3,14 +3,13 @@
 import OrdersTable from "./OrdersTable";
 
 async function getOrders() {
-  const res = await fetch("http://127.0.0.1:3001/orders", {
-    cache: "no-store", // Ensures fresh data on every request
+  const res = await fetch("https://food-r2o4.onrender.com/orders", {
+    cache: "no-store",
   });
 
   if (!res.ok) return [];
 
   const data = await res.json();
-  // Ensure we return an array even if the API structure is nested
   return Array.isArray(data) ? data : data.orders || [];
 }
 

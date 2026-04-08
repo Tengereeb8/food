@@ -39,7 +39,7 @@ const SignIn = () => {
         />
 
         <Input
-          // type="password"
+          type="password"
           placeholder="Password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}

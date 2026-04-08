@@ -22,14 +22,7 @@ import {
 import { ChevronDown, Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {
-  Alert,
-  AlertAction,
-  AlertDescription,
-  AlertTitle,
-} from "@/components/ui/alert";
 import { getStatusStyles } from "./funcions/status-style";
-import { Header } from "../../components/Header";
 
 export default function OrdersTable({ initialOrders }: OrdersTableProps) {
   const [orders, setOrders] = useState(initialOrders);
