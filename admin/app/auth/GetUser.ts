@@ -5,6 +5,8 @@ export const getUser = async () => {
 
   const token = cookieStore.get("token")?.value;
 
+  if (!token) return;
+
   const response = await fetch("http://localhost:3001/users/profile", {
     method: "GET",
     headers: {
@@ -14,7 +16,6 @@ export const getUser = async () => {
   });
 
   const data = await response.json();
-  console.log(data);
 
   return data;
 };

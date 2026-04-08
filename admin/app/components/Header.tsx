@@ -14,6 +14,10 @@ import Link from "next/link";
 export const Header = async () => {
   const user = await getUser();
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <div className="font-inter">
       <DropdownMenu>

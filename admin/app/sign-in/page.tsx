@@ -18,7 +18,7 @@ const SignIn = () => {
 
     try {
       const data = await signIn(credentials);
-      localStorage.set("token", data?.token, { expires: 7 });
+      localStorage.setItem("token", data?.token);
       router.push("/admin/food-menu");
     } catch (error) {
       console.error(error);

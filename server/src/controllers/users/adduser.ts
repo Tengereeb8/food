@@ -21,10 +21,8 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    // Hash the password
     const hashedPassword = await hashPassword(password);
 
-    // Create user in Neon via Prisma
     const newUser = await prisma.user.create({
       data: {
         email,
@@ -44,7 +42,6 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// 2. Login User
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
